@@ -1,3 +1,33 @@
-<h1>Another Boring Chat app</h1>
-<hr />
-<router-outlet></router-outlet>
+<nb-layout>
+  <nb-layout-header fixed>
+    <header>
+      <h1>Boring Chat</h1>
+      <ng-container *ngIf="!(loading$ | async)">
+        <ng-container *ngIf="auth.user$ | async as user; else showLogin">
+          <p>
+            Hello, {{ user?.name }}!
+            <button nbButton outline size="tiny" (click)="logout()">
+              Sign out
+            </button>
+          </p>
+        </ng-container>
+        <ng-template #showLogin>
+          <p>
+            Hello, Stranger!
+            <button nbButton status="success" size="tiny" (click)="login()">
+              Sign in
+            </button>
+          </p>
+        </ng-template>
+      </ng-container>
+    </header>
+  </nb-layout-header>
+
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    <p>footer</p>
+  </nb-layout-footer>
+</nb-layout>

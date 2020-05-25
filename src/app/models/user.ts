@@ -7,13 +7,14 @@ export interface User {
 
 export interface Conversation {
   owner: string;
-  created: string;
-  users: User[];
-  messages: Message[];
+  created: any;
+  users: { [key: string]: User };
+  pendingApproval: Array<User>;
+  messages: Array<Message>;
 }
 
 export interface Message {
   content: string;
-  timestamp: string;
+  timestamp: any;
   uid: string;
 }

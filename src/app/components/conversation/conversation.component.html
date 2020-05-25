@@ -1,1 +1,36 @@
-<p>conversation works!</p>
+<ng-container *ngIf="conversation$ | async as c; else showError">
+  <!-- <p>
+    Users:
+    <span *ngFor="let name of chatUsers$ | async">
+      {{ name }}
+    </span>
+  </p> -->
+
+  <nb-chat title="Having a boring chat with ..." size="giant">
+    <nb-chat-message
+      *ngFor="let msg of c.messages; trackBy: trackMessageBy"
+      [message]="msg.content"
+      [sender]="c.users[msg.uid].name"
+      [date]="msg.timestamp.toDate()"
+      dateFormat="short"
+      [reply]="msg.uid === (auth.user$ | async)?.uid"
+      [avatar]="c.users[msg.uid].photo"
+    >
+    </nb-chat-message>
+
+    <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
+  </nb-chat>
+</ng-container>
+
+<ng-template #showError>
+  <p>Cannot find conversation. Please verify URL</p>
+  <button
+    nbButton
+    outline
+    status="success"
+    disabled="createDisabled"
+    (click)="createDisabled = true; createChat()"
+  >
+    Create Chat
+  </button>
+</ng-template>

@@ -8,6 +8,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { HomeModule } from './components/home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NbThemeModule, NbLayoutModule, NbButtonModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ConversationModule } from './components/conversation/conversation.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +22,13 @@ import { HomeModule } from './components/home/home.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'dark' }),
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NbButtonModule,
     HomeModule,
+    ConversationModule,
   ],
   bootstrap: [AppComponent],
 })
